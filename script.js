@@ -368,9 +368,6 @@ class NodeEditor {
         
         // Create connection
         this.createConnection(sourceNode.id, newNode.id);
-        
-        // Add connection button on the line
-        this.addConnectionButton(sourceNode, newNode);
     }
     
     createConnection(fromNodeId, toNodeId) {
