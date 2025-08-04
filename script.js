@@ -49,14 +49,19 @@ class NodeEditor {
         nodeElement.style.left = x + 'px';
         nodeElement.style.top = y + 'px';
         
+        const isFirstNode = this.nodes.length === 0;
+        const deleteButtonHtml = isFirstNode ? '' : `
+            <button class="node-delete-btn" onclick="nodeEditor.deleteNode('${nodeId}')" title="Delete node">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
+                </svg>
+            </button>
+        `;
+        
         nodeElement.innerHTML = `
             <div class="node-header">
                 <div class="node-title" onclick="nodeEditor.editNodeName('${nodeId}', this)" title="Click to edit name">Node ${this.nodes.length + 1}</div>
-                <button class="node-delete-btn" onclick="nodeEditor.deleteNode('${nodeId}')" title="Delete node">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
-                    </svg>
-                </button>
+                ${deleteButtonHtml}
             </div>
             <div class="node-content">
                 <select class="node-type-select" onchange="nodeEditor.updateNodeType('${nodeId}', this.value)">
@@ -92,7 +97,8 @@ class NodeEditor {
             name: `Node ${this.nodes.length + 1}`,
             x: x,
             y: y,
-            config: this.getDefaultConfig(type)
+            config: this.getDefaultConfig(type),
+            isFirstNode: this.nodes.length === 0 // Mark the first node
         };
         
         this.nodes.push(nodeData);
@@ -246,17 +252,7 @@ class NodeEditor {
         
         const options = configOptions[node.type] || [];
         
-        let html = `
-            <div class="config-header">
-                <h4>${node.type.charAt(0).toUpperCase() + node.type.slice(1)} Node Configuration</h4>
-                <button class="config-delete-btn" onclick="nodeEditor.deleteNode('${node.id}')" title="Delete node">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
-                    </svg>
-                    Delete
-                </button>
-            </div>
-        `;
+        let html = `<h4>${node.type.charAt(0).toUpperCase() + node.type.slice(1)} Node Configuration</h4>`;
         
         // Add name configuration first
         html += `
@@ -278,6 +274,20 @@ class NodeEditor {
                 </div>
             `;
         });
+        
+        // Add delete button at the bottom if not the first node
+        if (!node.isFirstNode) {
+            html += `
+                <div class="config-delete-section">
+                    <button class="config-delete-btn" onclick="nodeEditor.deleteNode('${node.id}')" title="Delete node">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
+                        </svg>
+                        Delete
+                    </button>
+                </div>
+            `;
+        }
         
         this.configContent.innerHTML = html;
     }
@@ -307,9 +317,9 @@ class NodeEditor {
         const node = this.nodes.find(n => n.id === nodeId);
         if (!node) return;
         
-        // Prevent deleting the last node
-        if (this.nodes.length <= 1) {
-            alert('Cannot delete the last node. At least one node must remain.');
+        // Prevent deleting the first node
+        if (node.isFirstNode) {
+            alert('Cannot delete the first node. This is the root node of your workflow.');
             return;
         }
         
