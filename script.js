@@ -52,6 +52,11 @@ class NodeEditor {
         nodeElement.innerHTML = `
             <div class="node-header">
                 <div class="node-title" onclick="nodeEditor.editNodeName('${nodeId}', this)" title="Click to edit name">Node ${this.nodes.length + 1}</div>
+                <button class="node-delete-btn" onclick="nodeEditor.deleteNode('${nodeId}')" title="Delete node">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
+                    </svg>
+                </button>
             </div>
             <div class="node-content">
                 <select class="node-type-select" onchange="nodeEditor.updateNodeType('${nodeId}', this.value)">
@@ -241,7 +246,17 @@ class NodeEditor {
         
         const options = configOptions[node.type] || [];
         
-        let html = `<h4>${node.type.charAt(0).toUpperCase() + node.type.slice(1)} Node Configuration</h4>`;
+        let html = `
+            <div class="config-header">
+                <h4>${node.type.charAt(0).toUpperCase() + node.type.slice(1)} Node Configuration</h4>
+                <button class="config-delete-btn" onclick="nodeEditor.deleteNode('${node.id}')" title="Delete node">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14ZM10 11v6M14 11v6"/>
+                    </svg>
+                    Delete
+                </button>
+            </div>
+        `;
         
         // Add name configuration first
         html += `
@@ -286,6 +301,48 @@ class NodeEditor {
                 titleElement.textContent = trimmedName;
             }
         }
+    }
+    
+    deleteNode(nodeId) {
+        const node = this.nodes.find(n => n.id === nodeId);
+        if (!node) return;
+        
+        // Prevent deleting the last node
+        if (this.nodes.length <= 1) {
+            alert('Cannot delete the last node. At least one node must remain.');
+            return;
+        }
+        
+        // Confirm deletion
+        if (!confirm(`Are you sure you want to delete "${node.name}"?`)) {
+            return;
+        }
+        
+        // Remove all connections involving this node
+        this.connections = this.connections.filter(conn => 
+            conn.from !== nodeId && conn.to !== nodeId
+        );
+        
+        // Remove the node from the nodes array
+        this.nodes = this.nodes.filter(n => n.id !== nodeId);
+        
+        // Remove the node element from the DOM
+        if (node.element && node.element.parentNode) {
+            node.element.parentNode.removeChild(node.element);
+        }
+        
+        // Clear configuration panel if this node was selected
+        if (this.selectedNode === nodeId) {
+            this.selectedNode = null;
+            this.configContent.innerHTML = '<p>Select a node to configure</p>';
+        }
+        
+        // Update connections display
+        this.updateConnections();
+        
+        // Remove any lingering add buttons
+        const addButtons = this.canvas.querySelectorAll('.add-node-btn');
+        addButtons.forEach(btn => btn.remove());
     }
     
     handleConnectionClick(nodeId, side) {
@@ -385,8 +442,11 @@ class NodeEditor {
     }
     
     startDrag(e, nodeId) {
-        // Prevent dragging when clicking on dropdowns or buttons
-        if (e.target.tagName === 'SELECT' || e.target.classList.contains('connection-point')) {
+        // Prevent dragging when clicking on dropdowns, buttons, or delete buttons
+        if (e.target.tagName === 'SELECT' || 
+            e.target.classList.contains('connection-point') ||
+            e.target.classList.contains('node-delete-btn') ||
+            e.target.closest('.node-delete-btn')) {
             return;
         }
         

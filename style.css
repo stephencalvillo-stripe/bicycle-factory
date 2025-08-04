@@ -129,6 +129,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    position: relative;
 }
 
 .node-title {
@@ -145,6 +146,30 @@ body {
 .node-title:hover {
     background-color: rgba(99, 91, 255, 0.08);
     color: #635bff;
+}
+
+.node-delete-btn {
+    background: none;
+    border: none;
+    color: #8898aa;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.node-delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.node-delete-btn svg {
+    pointer-events: none;
 }
 
 .node-type-select {
@@ -259,6 +284,47 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     letter-spacing: -0.01em;
+}
+
+.config-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.config-header h4 {
+    margin: 0;
+    color: #32325d;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.config-delete-btn {
+    background-color: #ffffff;
+    border: 1px solid #e6ebf1;
+    color: #8898aa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.config-delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.05);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.config-delete-btn svg {
+    pointer-events: none;
 }
 
 .config-item {
