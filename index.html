@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+        <h1>Node Editor</h1>
+        <button class="close-button" onclick="closeApp()">×</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Canvas -->
+        <div class="canvas-container">
+            <svg class="connections-svg" id="connectionsSvg">
+                <!-- SVG lines will be drawn here -->
+            </svg>
+            <div class="canvas" id="canvas">
+                <!-- Nodes will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Configuration Panel -->
+        <div class="config-panel" id="configPanel">
+            <h3>Node Configuration</h3>
+            <div class="config-content" id="configContent">
+                <p>Select a node to configure</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
