@@ -455,9 +455,62 @@ class NodeEditor {
 
 // Global functions
 function closeApp() {
-    if (confirm('Are you sure you want to close the Node Editor?')) {
+    const appName = document.getElementById('appTitle').textContent;
+    if (confirm(`Are you sure you want to close ${appName}?`)) {
         window.close();
     }
+}
+
+function editAppTitle(titleElement) {
+    // Create an input field for editing
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = titleElement.textContent;
+    input.className = 'app-title-input';
+    input.style.cssText = `
+        background: transparent;
+        border: 1px solid #635bff;
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #32325d;
+        letter-spacing: -0.01em;
+        outline: none;
+        font-family: inherit;
+        min-width: 200px;
+    `;
+    
+    // Replace the title with the input
+    titleElement.style.display = 'none';
+    titleElement.parentNode.insertBefore(input, titleElement.nextSibling);
+    input.focus();
+    input.select();
+    
+    const finishEditing = () => {
+        const newTitle = input.value.trim() || titleElement.textContent;
+        titleElement.textContent = newTitle;
+        titleElement.style.display = 'block';
+        input.remove();
+        
+        // Update the page title as well
+        document.title = newTitle;
+    };
+    
+    input.addEventListener('blur', finishEditing);
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            finishEditing();
+        } else if (e.key === 'Escape') {
+            titleElement.style.display = 'block';
+            input.remove();
+        }
+    });
+    
+    // Prevent any other interactions while editing
+    input.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 }
 
 // Initialize the application

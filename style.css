@@ -32,6 +32,15 @@ body {
     font-weight: 600;
     color: #32325d;
     letter-spacing: -0.01em;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.header-bar h1:hover {
+    background-color: rgba(99, 91, 255, 0.08);
+    color: #635bff;
 }
 
 .close-button {
