@@ -6,10 +6,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f6f9fc;
+    background-color: #ffffff;
     height: 100vh;
     overflow: hidden;
-    color: #32325d;
+    color: #000000;
     font-size: 14px;
     line-height: 1.5;
 }
@@ -17,51 +17,51 @@ body {
 /* Header Bar */
 .header-bar {
     background-color: #ffffff;
-    color: #32325d;
+    color: #000000;
     padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 64px;
-    border-bottom: 1px solid #e6ebf1;
-    box-shadow: 0 1px 0 rgba(18, 20, 25, 0.06);
+    border-bottom: 1px solid #e1e5e9;
+    box-shadow: none;
 }
 
 .header-bar h1 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #32325d;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
     letter-spacing: -0.01em;
     cursor: pointer;
-    padding: 6px 8px;
-    border-radius: 6px;
-    transition: all 0.15s ease;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .header-bar h1:hover {
-    background-color: rgba(99, 91, 255, 0.08);
-    color: #635bff;
+    background-color: #f7f7f7;
+    color: #000000;
 }
 
 .close-button {
     background: none;
     border: none;
-    color: #8898aa;
-    font-size: 20px;
+    color: #666666;
+    font-size: 18px;
     cursor: pointer;
     width: 32px;
     height: 32px;
-    border-radius: 6px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.15s ease;
-    font-weight: 500;
+    transition: all 0.2s ease;
+    font-weight: 400;
 }
 
 .close-button:hover {
-    background-color: #f6f9fc;
-    color: #525f7f;
+    background-color: #f7f7f7;
+    color: #000000;
 }
 
 /* Main Container */
@@ -75,7 +75,7 @@ body {
     flex: 1;
     position: relative;
     background-color: #ffffff;
-    border-right: 1px solid #e6ebf1;
+    border-right: 1px solid #e1e5e9;
 }
 
 .canvas {
@@ -85,8 +85,8 @@ body {
     overflow: hidden;
     background-color: #ffffff;
     background-image: 
-        radial-gradient(circle, #e6ebf1 1px, transparent 1px);
-    background-size: 24px 24px;
+        radial-gradient(circle, #e1e5e9 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 .connections-svg {
@@ -103,11 +103,11 @@ body {
 .node {
     position: absolute;
     background-color: #ffffff;
-    border: 1px solid #e6ebf1;
+    border: 1px solid #e1e5e9;
     border-radius: 8px;
     padding: 16px;
     min-width: 160px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07), 0 1px 1.5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: grab;
     z-index: 10;
     user-select: none;
@@ -115,13 +115,13 @@ body {
 }
 
 .node:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 3px rgba(0, 0, 0, 0.06);
-    border-color: #d1d9e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-color: #cccccc;
 }
 
 .node.selected {
-    border-color: #635bff;
-    box-shadow: 0 4px 12px rgba(99, 91, 255, 0.15), 0 2px 3px rgba(99, 91, 255, 0.1);
+    border-color: #675DFF;
+    box-shadow: 0 2px 8px rgba(103, 93, 255, 0.2);
 }
 
 .node-header {
@@ -133,29 +133,29 @@ body {
 }
 
 .node-title {
-    font-weight: 600;
-    font-size: 15px;
-    color: #32325d;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
     cursor: pointer;
     padding: 4px 6px;
     border-radius: 4px;
-    transition: all 0.15s ease;
-    letter-spacing: -0.01em;
+    transition: all 0.2s ease;
+    letter-spacing: 0;
 }
 
 .node-title:hover {
-    background-color: rgba(99, 91, 255, 0.08);
-    color: #635bff;
+    background-color: #f7f7f7;
+    color: #000000;
 }
 
 .node-delete-btn {
     background: none;
     border: none;
-    color: #8898aa;
+    color: #666666;
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,8 +164,8 @@ body {
 }
 
 .node-delete-btn:hover {
-    background-color: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    background-color: #f7f7f7;
+    color: #000000;
 }
 
 .node-delete-btn svg {
@@ -173,38 +173,39 @@ body {
 }
 
 .node-type-select {
-    padding: 6px 10px;
-    border: 1px solid #e6ebf1;
-    border-radius: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e1e5e9;
+    border-radius: 4px;
     font-size: 13px;
-    color: #525f7f;
+    color: #000000;
     cursor: pointer;
     background-color: #ffffff;
-    transition: all 0.15s ease;
-    font-weight: 500;
+    transition: all 0.2s ease;
+    font-weight: 400;
+    width: 100%;
 }
 
 .node-type-select:hover {
-    border-color: #d1d9e6;
+    border-color: #cccccc;
 }
 
 .node-type-select:focus {
     outline: none;
-    border-color: #635bff;
-    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+    border-color: #000000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .node-content {
     font-size: 13px;
-    color: #8898aa;
+    color: #666666;
 }
 
 /* Connection Points */
 .connection-point {
     position: absolute;
-    width: 18px;
-    height: 18px;
-    background-color: #d1d9e6;
+    width: 16px;
+    height: 16px;
+    background-color: #cccccc;
     border: 2px solid #ffffff;
     border-radius: 50%;
     cursor: pointer;
@@ -214,19 +215,19 @@ body {
 }
 
 .connection-point:hover {
-    background-color: #635bff;
-    transform: scale(1.15);
-    box-shadow: 0 2px 4px rgba(99, 91, 255, 0.3);
+    background-color: #000000;
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .connection-point.right {
-    right: -10px;
+    right: -8px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .connection-point.left {
-    left: -10px;
+    left: -8px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -234,9 +235,9 @@ body {
 /* Add Node Button */
 .add-node-btn {
     position: absolute;
-    width: 28px;
-    height: 28px;
-    background-color: #635bff;
+    width: 24px;
+    height: 24px;
+    background-color: #000000;
     border: 2px solid #ffffff;
     border-radius: 50%;
     cursor: pointer;
@@ -244,76 +245,76 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(99, 91, 255, 0.25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .add-node-btn:hover {
-    background-color: #7c73ff;
+    background-color: #333333;
     transform: scale(1.1);
-    box-shadow: 0 3px 6px rgba(99, 91, 255, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Configuration Panel */
 .config-panel {
     width: 320px;
     background-color: #ffffff;
-    border-left: 1px solid #e6ebf1;
+    border-left: 1px solid #e1e5e9;
     padding: 24px;
     overflow-y: auto;
 }
 
 .config-panel h3 {
     margin-bottom: 24px;
-    color: #32325d;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
 }
 
 .config-content {
-    color: #8898aa;
+    color: #666666;
 }
 
 .config-content h4 {
-    color: #32325d;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 0;
 }
 
 .config-delete-section {
     margin-top: 32px;
     padding-top: 20px;
-    border-top: 1px solid #e6ebf1;
+    border-top: 1px solid #e1e5e9;
     display: flex;
     justify-content: flex-end;
 }
 
 .config-delete-btn {
     background-color: #ffffff;
-    border: 1px solid #e6ebf1;
-    color: #8898aa;
-    padding: 10px 16px;
-    border-radius: 6px;
+    border: 1px solid #e1e5e9;
+    color: #666666;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: all 0.15s ease;
+    gap: 6px;
+    transition: all 0.2s ease;
     font-family: inherit;
 }
 
 .config-delete-btn:hover {
-    background-color: rgba(239, 68, 68, 0.05);
-    border-color: #ef4444;
-    color: #ef4444;
+    background-color: #f7f7f7;
+    border-color: #cccccc;
+    color: #000000;
 }
 
 .config-delete-btn svg {
@@ -326,59 +327,59 @@ body {
 
 .config-item label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-size: 13px;
-    color: #525f7f;
-    letter-spacing: -0.003em;
+    margin-bottom: 6px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
 }
 
 .config-item select,
 .config-item input {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e6ebf1;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #32325d;
+    padding: 8px 12px;
+    border: 1px solid #e1e5e9;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #000000;
     background-color: #ffffff;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     font-family: inherit;
 }
 
 .config-item select:hover,
 .config-item input:hover {
-    border-color: #d1d9e6;
+    border-color: #cccccc;
 }
 
 .config-item select:focus,
 .config-item input:focus {
     outline: none;
-    border-color: #635bff;
-    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+    border-color: #000000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Connection Lines */
 .connection-line {
-    stroke: #d1d9e6;
+    stroke: #cccccc;
     stroke-width: 2;
     fill: none;
     pointer-events: none;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
 }
 
 .connection-line.selected {
-    stroke: #635bff;
+    stroke: #000000;
     stroke-width: 3;
 }
 
 /* Dragging Styles */
 .node.dragging {
-    opacity: 0.95;
+    opacity: 0.9;
     z-index: 100;
     cursor: grabbing;
     transform: scale(1.02);
-    box-shadow: 0 8px 24px rgba(99, 91, 255, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .canvas.dragging {
